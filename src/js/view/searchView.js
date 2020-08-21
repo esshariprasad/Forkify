@@ -16,6 +16,7 @@ export const clearResults = () =>{
 
 const limitRecipeTitle = (title,limit = 17) => {
     // 'pasta with tamato and spinach'
+    // we split when characters are more than 17
     if(title.length > limit)
         {
             const newTitle = [];
@@ -33,6 +34,7 @@ const limitRecipeTitle = (title,limit = 17) => {
 
             // 2)initial value of the accumulator/
         
+            //joining the resulting array
             return `${newTitle.join(' ')}...`; 
             
         }

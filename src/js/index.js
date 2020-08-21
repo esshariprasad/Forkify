@@ -1,5 +1,5 @@
 import Search from './models/Search'
-import { elements } from './view/base'
+import { elements, renderLoader, clearLoader } from './view/base'
 import * as searchView from './view/searchView'
 /** Global State of the app
  * - Search object
@@ -21,9 +21,13 @@ import * as searchView from './view/searchView'
         searchView.clearInput();
         searchView.clearResults();
 
+        //adding loader by passing parent element
+        console.log("HELLO");
+        renderLoader(elements.searchRes);
         // 4) Search for recipes
           await  state.search.getResults(); //getResults is aync functions which returns a promise
 
+          clearLoader();
         // 5) render results on UI //results are present in result variable
         searchView.renderResults(state.search.results);
 
