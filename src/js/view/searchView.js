@@ -9,7 +9,8 @@ export const clearInput = () => { //we don't want implict return so we are using
 };
 
 export const clearResults = () =>{
-    elements.searchResList.innerHTML = ''; //removing previous results
+    elements.searchResList.innerHTML = ''; //removing previous results\
+    elements.searchResPages.innerHTML='';
     
 };
 
@@ -59,7 +60,50 @@ const renderRecipe = recipe => {
     elements.searchResList.insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderResults = recipes => {
-    //for each result rendexRecipe is called
-    recipes.forEach(renderRecipe)
+//for prev for page 2 it gives 1 and for next gives 2
+const createButton = (page, type) => `
+<button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page-1 : page +1}>
+<svg class="search__icon">
+    <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
+</svg>
+<span>Page ${type === 'prev' ? page-1 : page +1}</span>
+</button>
+`;
+const renderButtons = (page, numResults, resPerPage) =>{
+    const pages = Math.ceil(numResults / resPerPage);
+    let button;
+
+    if( page === 1 && pages > 1)
+    {
+        button = createButton(page, 'next');
+        //button to go to next page
+    }
+    else if( page < pages){
+        //Both buttons
+        button = `
+            ${createButton(page, 'prev')}
+            ${createButton(page, 'next')}
+        `;
+    }
+    else if (page == pages){
+        //Only button to go to prev page
+        button = createButton(page, 'prev');
+    }
+    //attaching the html
+    elements.searchResPages.insertAdjacentHTML('afterbegin',button);
 };
+export const renderResults = (recipes,page =1, resPerPage=10) => {
+    const start = (page -1) *resPerPage;
+    const end = page * resPerPage;
+    //taking part of the results
+    recipes.slice(start,end).forEach(renderRecipe);
+    //for each result rendexRecipe is called
+    // recipes.forEach(renderRecipe)
+
+    //render Buttons with page,numResult,resperpage
+    renderButtons(page, recipes.length,resPerPage);
+
+
+};
+
+//after getting results we render buttons

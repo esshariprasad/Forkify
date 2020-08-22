@@ -22,23 +22,36 @@ import * as searchView from './view/searchView'
         searchView.clearResults();
 
         //adding loader by passing parent element
-        console.log("HELLO");
         renderLoader(elements.searchRes);
         // 4) Search for recipes
-          await  state.search.getResults(); //getResults is aync functions which returns a promise
+          await  state.search.getResults(); //getResults is async functions which returns a promise
 
+          searchView.renderResults(state.search.results);
+         
           clearLoader();
         // 5) render results on UI //results are present in result variable
-        searchView.renderResults(state.search.results);
+        
 
     }
 
 }
 
+//how we add event to elements which is not already loaded so we here use 
+//event deligation
+elements.searchResPages.addEventListener('click',e =>
+{   const btn = e.target.closest('.btn-inline');
+    if(btn){
+        const goToPage = parseInt(btn.dataset.goto,10); //reading from data-goto attribute
+        searchView.clearResults();
+        searchView.renderResults(state.search.results,goToPage);
+        console.log(goToPage); 
+    }
+})
+
 elements.searchForm.addEventListener('submit',e =>{
     e.preventDefault(); // to stop reloading
     controlSearch();
-})
+});
 
 
 

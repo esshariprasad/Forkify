@@ -4,12 +4,13 @@ export const elements = {
     searchForm: document.querySelector('.search'),
     searchInput: document.querySelector('.search__field'),
     searchResList: document.querySelector('.results__list'),
-    searchRes: document.querySelector('.results')
+    searchRes: document.querySelector('.results'),
+    searchResPages: document.querySelector('.results__pages')
 };
 
 
 export const elementStrings = {
-    loader: 'loader' //pasing the class name of loader
+    loader: 'loader' //pasing the css class name of loader
 }
 
 export const renderLoader = parent => {
