@@ -5,7 +5,8 @@ export const elements = {
     searchInput: document.querySelector('.search__field'),
     searchResList: document.querySelector('.results__list'),
     searchRes: document.querySelector('.results'),
-    searchResPages: document.querySelector('.results__pages')
+    searchResPages: document.querySelector('.results__pages'),
+
 };
 
 
@@ -22,7 +23,7 @@ export const renderLoader = parent => {
     </div>
 
     `;
-    console.log("HI");
+    
     //right at the begining of parent element
     parent.insertAdjacentHTML('afterbegin',loader);
 
