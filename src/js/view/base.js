@@ -6,6 +6,7 @@ export const elements = {
     searchResList: document.querySelector('.results__list'),
     searchRes: document.querySelector('.results'),
     searchResPages: document.querySelector('.results__pages'),
+    recipe: document.querySelector('.recipe')
 
 };
 
@@ -14,6 +15,8 @@ export const elementStrings = {
     loader: 'loader' //pasing the css class name of loader
 }
 
+
+//attaching the loader to parent element
 export const renderLoader = parent => {
     const loader = `
     <div class="${elementStrings.loader}">
