@@ -110,4 +110,21 @@ export default class Search {
         });
         this.ingredients = newIngredients;
     }
+
+    updateServings(type) {
+        //Servings
+        const newServings = type === 'dec'? this.servings - 1: this.servings +1;
+        
+
+        //Ingredients
+
+        
+        this.ingredients.forEach(ing =>{
+            ing.count *=  (newServings/ this.servings);
+            // 4 now 3 * this.servings holds old servings
+            // 4 *(3/4)
+        });
+        
+        this.servings = newServings;
+    }
 }
