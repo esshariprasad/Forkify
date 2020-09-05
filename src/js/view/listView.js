@@ -25,8 +25,10 @@ export const renderItem = item =>{
 
 export const deleteItem = id =>{
 
-    const item = document.querySelector(`[date-itemid="${id}"]`);
+    const item = document.querySelector(`li[data-itemid="${id}"]`);
     //only do that if there is a item
+    
     if(item) item.parentElement.removeChild(item);
+    
 
 };
