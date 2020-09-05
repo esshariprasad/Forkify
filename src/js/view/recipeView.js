@@ -1,6 +1,7 @@
 import {elements} from './base';
 import { Fraction } from 'fractional';
 
+
 export const clearRecipe = ()  =>{
     elements.recipe.innerHTML = '';
 };
@@ -40,13 +41,15 @@ const createIngredient = ingredient =>`
             </div>
             </li>
 
-`
-export const renderRecipe = recipe => {
+`;
+
+export const renderRecipe = (recipe, isLiked ) => {
+    
     const markup = `
     <figure class="recipe__fig">
                 <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
-                <h1 class="${recipe.title}">
-                    <span>Pasta with tomato cream sauce</span>
+                <h1 class="recipe__title">
+                    <span>${recipe.title}</span>
                 </h1>
             </figure>
             <div class="recipe__details">
@@ -80,7 +83,7 @@ export const renderRecipe = recipe => {
                 </div>
                 <button class="recipe__love">
                     <svg class="header__likes">
-                        <use href="img/icons.svg#icon-heart-outlined"></use>
+                        <use href="img/icons.svg#icon-heart${isLiked ? '' :'-outlined'}"></use>
                     </svg>
                 </button>
             </div>
