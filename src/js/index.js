@@ -15,8 +15,7 @@ import * as likesView from './view/likesView';
  *
  */
  const state = {}
-//testing
-window.state = state;
+
 
  /*
 Search Controller
@@ -184,10 +183,6 @@ Like Controller
 
 */
 
-//TESTING
-state.likes = new Likes();
-console.log(state.likes);
-likesView.toogleLikeMenu(state.likes.getNumlikes());
 const controlLike = () =>{
 
     if(!state.likes) state.likes = new Likes();
@@ -233,8 +228,23 @@ const controlLike = () =>{
     }
     //get number of likes from likes.js
     likesView.toogleLikeMenu(state.likes.getNumlikes());
-}
+};
 
+//Restore liked recipes on page load
+window.addEventListener('load',() =>{
+    
+    state.likes = new Likes();
+    
+    //Restore likes
+
+    state.likes.readStorage();
+    //Toggle like  menu button
+    likesView.toogleLikeMenu(state.likes.getNumlikes());
+
+    //Render the existing likes
+
+    state.likes.likes.forEach(like => likesView.renderLike(like));
+});
 
 // Handling recipe button clicks and like button
 elements.recipe.addEventListener('click',e =>{
@@ -264,4 +274,4 @@ elements.recipe.addEventListener('click',e =>{
 
 });
 
-window.l = new List();
+
